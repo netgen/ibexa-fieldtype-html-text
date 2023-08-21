@@ -7,7 +7,7 @@
          colors="true"
          failOnWarning="true">
     <testsuites>
-        <testsuite name="ngenhancedlink_field_type">
+        <testsuite name="nghtmltext_field_type">
             <directory>tests/lib</directory>
         </testsuite>
     </testsuites>

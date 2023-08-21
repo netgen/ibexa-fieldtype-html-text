@@ -1,6 +1,6 @@
 {
-    "name": "netgen/ibexa-fieldtype-enhanced-link",
-    "description": "Netgen's enhanced link field type for Ibexa",
+    "name": "netgen/ibexa-fieldtype-html-text",
+    "description": "Netgen's html text field type for Ibexa",
     "type": "ibexa-bundle",
     "authors": [
         {
