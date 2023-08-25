@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Netgen\IbexaFieldTypeEnhancedLink\FieldType;
+namespace Netgen\IbexaFieldTypeHtmlText\FieldType;
 
 use Ibexa\Contracts\Core\FieldType\Indexable;
 use Ibexa\Contracts\Core\Persistence\Content\Field;
@@ -10,41 +10,46 @@ use Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition;
 use Ibexa\Contracts\Core\Search;
 use Ibexa\Contracts\Core\Search\FieldType\StringField;
 
-use function is_int;
-
 class SearchFields implements Indexable
 {
-    public function getIndexData(Field $field, FieldDefinition $fieldDefinition): array
+    public function getIndexData(Field $field, FieldDefinition $fieldDefinition)
     {
-        $type = $field->value->data['type'] ?? null;
-        $id = $field->value->data['id'] ?? null;
-
-        if ($type === Type::LINK_TYPE_INTERNAL && is_int($id)) {
-            return [
-                new Search\Field(
-                    'value',
-                    $id,
-                    new StringField(),
-                ),
-            ];
-        }
-
-        return [];
+        return [
+            new Search\Field(
+                'value',
+                $this->extractShortText($field->value->data),
+                new Search\FieldType\StringField()
+            ),
+            new Search\Field(
+                'fulltext',
+                $field->value->data,
+                new Search\FieldType\FullTextField()
+            ),
+        ];
     }
 
-    public function getIndexDefinition(): array
+    public function getIndexDefinition()
     {
         return [
             'value' => new StringField(),
         ];
     }
 
-    public function getDefaultMatchField(): string
+    private function extractShortText($string)
+    {
+        if ($string === null || trim($string) === '') {
+            return '';
+        }
+
+        return mb_substr(strtok(trim((string)$string), "\r\n"), 0, 255);
+    }
+
+    public function getDefaultMatchField()
     {
         return 'value';
     }
 
-    public function getDefaultSortField(): string
+    public function getDefaultSortField()
     {
         return $this->getDefaultMatchField();
     }

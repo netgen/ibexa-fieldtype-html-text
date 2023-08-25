@@ -26,14 +26,14 @@
     "license": "GPL-2.0-only",
     "autoload": {
         "psr-4": {
-            "Netgen\\IbexaFieldTypeEnhancedLink\\": "lib/",
-            "Netgen\\IbexaFieldTypeEnhancedLinkBundle\\": "bundle/"
+            "Netgen\\IbexaFieldTypeHtmlText\\": "lib/",
+            "Netgen\\IbexaFieldTypeHtmlTextBundle\\": "bundle/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Netgen\\IbexaFieldTypeEnhancedLink\\Tests\\Integration\\": "tests/integration",
-            "Netgen\\IbexaFieldTypeEnhancedLink\\Tests\\Unit\\": "tests/lib"
+            "Netgen\\IbexaFieldTypeHtmlText\\Tests\\Integration\\": "tests/integration",
+            "Netgen\\IbexaFieldTypeHtmlText\\Tests\\Unit\\": "tests/lib"
         }
     },
     "extra": {
