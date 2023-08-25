@@ -1,74 +1,37 @@
 parameters:
-    ng.fieldtype.enhanced_link.identifier: 'ngenhancedlink'
+    ng.fieldtype.html_text.identifier: 'nghtmltext'
 
 services:
-    Netgen\IbexaFieldTypeEnhancedLink\FieldType\Type:
+    Netgen\IbexaFieldTypeHtmlText\FieldType\Type:
         parent: Ibexa\Core\FieldType\FieldType
         public: true
-        arguments:
-            - '@Ibexa\Core\Persistence\Cache\ContentHandler'
-            - '@Netgen\IbexaFieldTypeEnhancedLink\FieldType\InternalLinkValidator'
         tags:
-            - { name: ibexa.field_type, alias: '%ng.fieldtype.enhanced_link.identifier%' }
+            - { name: ibexa.field_type, alias: '%ng.fieldtype.html_text.identifier%' }
 
-    Netgen\IbexaFieldTypeEnhancedLink\Persistence\Legacy\FieldValueConverter:
+    Netgen\IbexaFieldTypeHtmlText\Persistence\Legacy\FieldValueConverter:
         tags:
-            - { name: ibexa.field_type.storage.legacy.converter, alias: '%ng.fieldtype.enhanced_link.identifier%' }
+            - { name: ibexa.field_type.storage.legacy.converter, alias: '%ng.fieldtype.html_text.identifier%' }
 
-    Netgen\IbexaFieldTypeEnhancedLinkBundle\Form\FieldDefinition\FormMapper:
-        arguments:
-            - '@ibexa.api.service.content_type'
-            - '@ibexa.api.service.location'
+    Netgen\IbexaFieldTypeHtmlText\FieldType\SearchFields:
         tags:
-            - { name: ibexa.admin_ui.field_type.form.mapper.definition, fieldType: '%ng.fieldtype.enhanced_link.identifier%' }
+            - { name: ibexa.field_type.indexable, alias: '%ng.fieldtype.html_text.identifier%' }
 
-    Netgen\IbexaFieldTypeEnhancedLink\FieldType\SearchFields:
-        tags:
-            - { name: ibexa.field_type.indexable, alias: '%ng.fieldtype.enhanced_link.identifier%' }
-
-    Netgen\IbexaFieldTypeEnhancedLinkBundle\Form\Field\FieldValueFormMapper:
+    Netgen\IbexaFieldTypeHtmlTextBundle\Form\FieldDefinition\FormMapper:
         arguments:
             - '@ibexa.api.service.content_type'
             - '@ibexa.api.service.location'
         tags:
-            - { name: ibexa.admin_ui.field_type.form.mapper.value, fieldType: '%ng.fieldtype.enhanced_link.identifier%' }
+            - { name: ibexa.admin_ui.field_type.form.mapper.definition, fieldType: '%ng.fieldtype.html_text.identifier%' }
 
-    Netgen\IbexaFieldTypeEnhancedLinkBundle\Form\Field\FieldValueType:
+    Netgen\IbexaFieldTypeHtmlTextBundle\Form\Field\FieldValueFormMapper:
         arguments:
-            - '@ibexa.api.service.content'
             - '@ibexa.api.service.content_type'
+            - '@ibexa.api.service.location'
+        tags:
+            - { name: ibexa.admin_ui.field_type.form.mapper.value, fieldType: '%ng.fieldtype.html_text.identifier%' }
+
+    Netgen\IbexaFieldTypeHtmlTextBundle\Form\Field\FieldValueType:
+        arguments:
             - '@ibexa.api.service.field_type'
         tags:
             - { name: 'form.type' }
-
-    Netgen\IbexaFieldTypeEnhancedLinkBundle\EventListener\UniversalDiscovery\:
-        resource: "../../../bundle/EventListener/UniversalDiscovery/*"
-        public: true
-        tags: ['kernel.event_subscriber']
-
-    Netgen\IbexaFieldTypeEnhancedLink\FieldType\InternalLinkValidator:
-        arguments:
-            $contentHandler: '@Ibexa\Contracts\Core\Persistence\Content\Handler'
-            $contentTypeHandler: '@Ibexa\Contracts\Core\Persistence\Content\Type\Handler'
-
-    Netgen\IbexaFieldTypeEnhancedLink\FieldType\UrlStorage\Gateway\DoctrineStorage:
-        class: Netgen\IbexaFieldTypeEnhancedLink\FieldType\UrlStorage\Gateway\DoctrineStorage
-        arguments: [ '@ibexa.api.storage_engine.legacy.connection' ]
-
-    Netgen\IbexaFieldTypeEnhancedLink\FieldType\UrlStorage:
-        class: Netgen\IbexaFieldTypeEnhancedLink\FieldType\UrlStorage
-        arguments:
-            - '@Netgen\IbexaFieldTypeEnhancedLink\FieldType\UrlStorage\Gateway\DoctrineStorage'
-            - "@?logger"
-        tags:
-            - { name: ibexa.field_type.storage.external.handler, alias: '%ng.fieldtype.enhanced_link.identifier%' }
-
-    Netgen\IbexaFieldTypeEnhancedLinkBundle\Templating\Twig\Extension\FieldTypeExtension:
-        tags:
-            - { name: twig.extension }
-
-    Netgen\IbexaFieldTypeEnhancedLinkBundle\Templating\Twig\Extension\FieldTypeRuntime:
-        arguments:
-            - '@ibexa.api.repository'
-        tags:
-            - { name: twig.runtime }

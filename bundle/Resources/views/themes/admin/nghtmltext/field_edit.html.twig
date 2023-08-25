@@ -1,0 +1,7 @@
+{% extends '@ibexadesign/content/form_fields.html.twig' %}
+
+{% trans_default_domain 'field_edit' %}
+
+{% block ibexa_fieldtype_nghtmltext_widget %}
+	{{- form_widget(form, {'attr': attr}) -}}
+{% endblock %}

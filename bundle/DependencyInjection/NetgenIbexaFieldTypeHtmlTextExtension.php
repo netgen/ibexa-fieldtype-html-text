@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Netgen\IbexaFieldTypeEnhancedLinkBundle\DependencyInjection;
+namespace Netgen\IbexaFieldTypeHtmlTextBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Resource\FileResource;
@@ -14,7 +14,7 @@ use Symfony\Component\Yaml\Yaml;
 
 use function file_get_contents;
 
-class NetgenIbexaFieldTypeEnhancedLinkExtension extends Extension implements PrependExtensionInterface
+class NetgenIbexaFieldTypeHtmlTextExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * @throws \Exception

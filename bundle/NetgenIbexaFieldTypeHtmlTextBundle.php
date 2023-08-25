@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Netgen\IbexaFieldTypeEnhancedLinkBundle;
+namespace Netgen\IbexaFieldTypeHtmlTextBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class NetgenIbexaFieldTypeEnhancedLinkBundle extends Bundle
+class NetgenIbexaFieldTypeHtmlTextBundle extends Bundle
 {
     public function build(ContainerBuilder $container): void
     {

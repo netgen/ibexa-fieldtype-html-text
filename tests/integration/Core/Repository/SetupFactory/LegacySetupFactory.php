@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Netgen\IbexaFieldTypeEnhancedLink\Tests\Integration\Core\Repository\SetupFactory;
+namespace Netgen\IbexaFieldTypeHtmlText\Tests\Integration\Core\Repository\SetupFactory;
 
 use Exception;
 use Ibexa\Contracts\Core\Test\Repository\SetupFactory\Legacy as CoreLegacySetupFactory;
@@ -25,7 +25,7 @@ class LegacySetupFactory extends CoreLegacySetupFactory
         $settingsPath = realpath(__DIR__ . '/../../../../../bundle/Resources/config/');
 
         if ($settingsPath === false) {
-            throw new RuntimeException('Unable to find EnhancedLink package settings');
+            throw new RuntimeException('Unable to find HtmlLink package settings');
         }
 
         $loader = new YamlFileLoader($containerBuilder, new FileLocator($settingsPath));
