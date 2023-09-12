@@ -22,6 +22,7 @@ class FieldValueFormMapper extends AbstractRelationFormMapper
                         'value',
                         FieldValueType::class,
                         [
+                            'row_attr' => ['class' => $fieldDefinition->fieldTypeIdentifier],
                             'required' => $fieldDefinition->isRequired,
                             'label' => $fieldDefinition->getName(),
                             'rows' => $data->fieldDefinition->fieldSettings['textRows'],
