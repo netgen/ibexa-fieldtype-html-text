@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FieldValueType extends AbstractType
+class NgHtmlTextFieldType extends AbstractType
 {
     private FieldTypeService $fieldTypeService;
 
@@ -52,7 +52,7 @@ class FieldValueType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('rows', null)
+            ->setDefault('rows', 20)
             ->setAllowedTypes('rows', ['integer']);
     }
 }
