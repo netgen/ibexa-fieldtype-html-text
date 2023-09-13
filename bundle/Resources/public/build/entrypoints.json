@@ -1,0 +1,9 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/bundles/netgenibexafieldtypehtmltext/build/app.js"
+      ]
+    }
+  }
+}

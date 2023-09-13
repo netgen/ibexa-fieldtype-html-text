@@ -4,4 +4,3 @@ coverage
 var
 vendor
 node_modules
-bundle/Resources/public/build
