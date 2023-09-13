@@ -8,7 +8,7 @@ use Ibexa\ContentForms\FieldType\Mapper\AbstractRelationFormMapper;
 use Ibexa\Contracts\ContentForms\Data\Content\FieldData;
 use Symfony\Component\Form\FormInterface;
 
-class FieldValueFormMapper extends AbstractRelationFormMapper
+class NgHtmlTextFormMapper extends AbstractRelationFormMapper
 {
     public function mapFieldValueForm(FormInterface $fieldForm, FieldData $data)
     {
@@ -20,8 +20,9 @@ class FieldValueFormMapper extends AbstractRelationFormMapper
                 $formConfig->getFormFactory()->createBuilder()
                     ->create(
                         'value',
-                        FieldValueType::class,
+                        NgHtmlTextFieldType::class,
                         [
+                            'row_attr' => ['class' => $fieldDefinition->fieldTypeIdentifier],
                             'required' => $fieldDefinition->isRequired,
                             'label' => $fieldDefinition->getName(),
                             'rows' => $data->fieldDefinition->fieldSettings['textRows'],

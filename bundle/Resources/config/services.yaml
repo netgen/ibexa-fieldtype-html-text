@@ -16,21 +16,21 @@ services:
         tags:
             - { name: ibexa.field_type.indexable, alias: '%ng.fieldtype.html_text.identifier%' }
 
-    Netgen\IbexaFieldTypeHtmlTextBundle\Form\FieldDefinition\FormMapper:
+    Netgen\IbexaFieldTypeHtmlTextBundle\Form\FieldDefinition\NgHtmlTextFormMapper:
         arguments:
             - '@ibexa.api.service.content_type'
             - '@ibexa.api.service.location'
         tags:
             - { name: ibexa.admin_ui.field_type.form.mapper.definition, fieldType: '%ng.fieldtype.html_text.identifier%' }
 
-    Netgen\IbexaFieldTypeHtmlTextBundle\Form\Field\FieldValueFormMapper:
+    Netgen\IbexaFieldTypeHtmlTextBundle\Form\Field\NgHtmlTextFormMapper:
         arguments:
             - '@ibexa.api.service.content_type'
             - '@ibexa.api.service.location'
         tags:
             - { name: ibexa.admin_ui.field_type.form.mapper.value, fieldType: '%ng.fieldtype.html_text.identifier%' }
 
-    Netgen\IbexaFieldTypeHtmlTextBundle\Form\Field\FieldValueType:
+    Netgen\IbexaFieldTypeHtmlTextBundle\Form\Field\NgHtmlTextFieldType:
         arguments:
             - '@ibexa.api.service.field_type'
         tags:
