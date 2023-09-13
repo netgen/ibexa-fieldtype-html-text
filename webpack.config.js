@@ -1,10 +1,6 @@
-
 const Encore = require('@symfony/webpack-encore');
-const Webpack = require('webpack');
 
-const path = require('path');
 Encore.reset();
-
 
 Encore
     // the project directory where all compiled assets will be stored
@@ -19,13 +15,6 @@ Encore
 
     // empty the outputPath dir before each build
     .cleanupOutputBeforeBuild()
-    .copyFiles([
-        { from: './node_modules/ckeditor4/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false },
-        { from: './node_modules/ckeditor4/adapters', to: 'ckeditor/adapters/[path][name].[ext]' },
-        { from: './node_modules/ckeditor4/lang', to: 'ckeditor/lang/[path][name].[ext]' },
-        { from: './node_modules/ckeditor4/plugins', to: 'ckeditor/plugins/[path][name].[ext]' },
-        { from: './node_modules/ckeditor4/skins', to: 'ckeditor/skins/[path][name].[ext]' },
-    ])
 
     .disableSingleRuntimeChunk()
 
