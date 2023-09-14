@@ -9,6 +9,7 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Tests\Core\FieldType\FieldTypeTest;
 use Netgen\IbexaFieldTypeHtmlText\FieldType\Type as HtmlTextType;
 use Netgen\IbexaFieldTypeHtmlText\FieldType\Value as HtmlTextValue;
+use Netgen\IbexaFieldTypeHtmlText\Utils\HtmlPurifier;
 
 /**
  * @group type
@@ -17,7 +18,8 @@ class HtmlTextTypeTest extends FieldTypeTest
 {
     protected function createFieldTypeUnderTest()
     {
-        $fieldType = new HtmlTextType();
+        $htmlPurifier = new HtmlPurifier();
+        $fieldType = new HtmlTextType($htmlPurifier);
         $fieldType->setTransformationProcessor($this->getTransformationProcessorMock());
 
         return $fieldType;
@@ -103,6 +105,15 @@ class HtmlTextTypeTest extends FieldTypeTest
             [
                 new HtmlTextValue('sindelfingen'),
                 'sindelfingen',
+            ],
+            // HTML purifier test cases
+            [
+                new HtmlTextValue('<b>Bold'),
+                '<b>Bold</b>'
+            ],
+            [
+                new HtmlTextValue("<h1>News</h1><script>alert('Something malicious');</script><a onclick=\"alert('Another malicious thing');\" href=\"https://netgen.io\">Netgen</a>"),
+                '<h1>News</h1><a href="https://netgen.io">Netgen</a>'
             ],
         ];
     }
