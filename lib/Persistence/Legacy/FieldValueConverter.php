@@ -34,11 +34,10 @@ class FieldValueConverter implements Converter
 
     public function toFieldDefinition(StorageFieldDefinition $storageDef, FieldDefinition $fieldDef): void
     {
-
         $fieldDef->fieldTypeConstraints->fieldSettings = new FieldSettings(
             [
                 'textRows' => $storageDef->dataInt1,
-            ]
+            ],
         );
         $fieldDef->defaultValue->data = null;
         $fieldDef->defaultValue->sortKey = '';

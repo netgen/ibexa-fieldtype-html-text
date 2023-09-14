@@ -12,14 +12,14 @@ use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\Core\FieldType\Value as BaseValue;
 use Netgen\IbexaFieldTypeHtmlText\Utils\HtmlPurifier;
 
+use function is_int;
+use function is_string;
+use function mb_substr;
+use function strtok;
+use function trim;
+
 class Type extends FieldType
 {
-    private HtmlPurifier $htmlPurifier;
-
-    public function __construct(HtmlPurifier $htmlPurifier) {
-        $this->htmlPurifier = $htmlPurifier;
-    }
-
     protected $settingsSchema = [
         'textRows' => [
             'type' => 'int',
@@ -28,14 +28,11 @@ class Type extends FieldType
     ];
 
     protected $validatorConfigurationSchema = [];
+    private HtmlPurifier $htmlPurifier;
 
-    protected function createValueFromInput($inputValue)
+    public function __construct(HtmlPurifier $htmlPurifier)
     {
-        if (is_string($inputValue)) {
-            $inputValue = new Value($inputValue);
-        }
-
-        return $inputValue;
+        $this->htmlPurifier = $htmlPurifier;
     }
 
     public function getFieldTypeIdentifier()
@@ -45,7 +42,7 @@ class Type extends FieldType
 
     public function getName(SPIValue $value, FieldDefinition $fieldDefinition, string $languageCode): string
     {
-        return (string)$value->text;
+        return (string) $value->text;
     }
 
     public function getEmptyValue()
@@ -55,7 +52,7 @@ class Type extends FieldType
 
     public function isEmptyValue(SPIValue $value)
     {
-        return $value->text === null || trim((string)$value->text) === '';
+        return $value->text === null || trim((string) $value->text) === '';
     }
 
     public function fromHash($hash)
@@ -65,17 +62,6 @@ class Type extends FieldType
         }
 
         return new Value($hash);
-    }
-
-    protected function checkValueStructure(SPIValue $value)
-    {
-        if (!is_string($value->text)) {
-            throw new InvalidArgumentType(
-                '$value->text',
-                'string',
-                $value->text
-            );
-        }
     }
 
     public function toHash(SPIValue $value)
@@ -90,18 +76,6 @@ class Type extends FieldType
     public function isSearchable()
     {
         return true;
-    }
-
-    protected function getSortInfo(BaseValue $value)
-    {
-        if ($this->isEmptyValue($value)) {
-            return '';
-        }
-
-        return $this->transformationProcessor->transformByGroup(
-            mb_substr(strtok(trim($value->text), "\r\n"), 0, 255),
-            'lowercase'
-        );
     }
 
     public function validateFieldSettings($fieldSettings)
@@ -119,9 +93,10 @@ class Type extends FieldType
                                 [
                                     '%setting%' => $name,
                                 ],
-                                "[$name]"
+                                "[{$name}]",
                             );
                         }
+
                         break;
                 }
             } else {
@@ -131,11 +106,43 @@ class Type extends FieldType
                     [
                         '%setting%' => $name,
                     ],
-                    "[$name]"
+                    "[{$name}]",
                 );
             }
         }
 
         return $validationErrors;
+    }
+
+    protected function createValueFromInput($inputValue)
+    {
+        if (is_string($inputValue)) {
+            $inputValue = new Value($inputValue);
+        }
+
+        return $inputValue;
+    }
+
+    protected function checkValueStructure(SPIValue $value)
+    {
+        if (!is_string($value->text)) {
+            throw new InvalidArgumentType(
+                '$value->text',
+                'string',
+                $value->text,
+            );
+        }
+    }
+
+    protected function getSortInfo(BaseValue $value)
+    {
+        if ($this->isEmptyValue($value)) {
+            return '';
+        }
+
+        return $this->transformationProcessor->transformByGroup(
+            mb_substr(strtok(trim($value->text), "\r\n"), 0, 255),
+            'lowercase',
+        );
     }
 }

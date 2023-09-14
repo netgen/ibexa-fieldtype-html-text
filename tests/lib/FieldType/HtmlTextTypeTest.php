@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Netgen\IbexaFieldTypeHtmlText\Tests\Unit\FieldType;
 
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
-
 use Ibexa\Tests\Core\FieldType\FieldTypeTest;
 use Netgen\IbexaFieldTypeHtmlText\FieldType\Type as HtmlTextType;
 use Netgen\IbexaFieldTypeHtmlText\FieldType\Value as HtmlTextValue;
@@ -16,43 +15,8 @@ use Netgen\IbexaFieldTypeHtmlText\Utils\HtmlPurifier;
  */
 class HtmlTextTypeTest extends FieldTypeTest
 {
-    protected function createFieldTypeUnderTest()
-    {
-        $htmlPurifier = new HtmlPurifier();
-        $fieldType = new HtmlTextType($htmlPurifier);
-        $fieldType->setTransformationProcessor($this->getTransformationProcessorMock());
-
-        return $fieldType;
-    }
-
-    protected function provideFieldTypeIdentifier()
-    {
-        return 'nghtmltext';
-    }
-
-    protected function getValidatorConfigurationSchemaExpectation()
-    {
-        return [];
-    }
-
-    protected function getSettingsSchemaExpectation()
-    {
-        return [
-            'textRows' => [
-                'type' => 'int',
-                'default' => 10,
-            ],
-        ];
-    }
-
-    protected function getEmptyValueExpectation()
-    {
-        return new HtmlTextValue();
-    }
-
     public function provideInvalidInputForAcceptValue()
     {
-
         return [
             [
                 23,
@@ -109,11 +73,11 @@ class HtmlTextTypeTest extends FieldTypeTest
             // HTML purifier test cases
             [
                 new HtmlTextValue('<b>Bold'),
-                '<b>Bold</b>'
+                '<b>Bold</b>',
             ],
             [
                 new HtmlTextValue("<h1>News</h1><script>alert('Something malicious');</script><a onclick=\"alert('Another malicious thing');\" href=\"https://netgen.io\">Netgen</a>"),
-                '<h1>News</h1><a href="https://netgen.io">Netgen</a>'
+                '<h1>News</h1><a href="https://netgen.io">Netgen</a>',
             ],
         ];
     }
@@ -139,7 +103,6 @@ class HtmlTextTypeTest extends FieldTypeTest
             [new HtmlTextValue('This is a piece of text'), 'This is a piece of text', [], 'en_GB'],
         ];
     }
-
 
     public function provideValidFieldSettings()
     {
@@ -170,5 +133,39 @@ class HtmlTextTypeTest extends FieldTypeTest
                 ],
             ],
         ];
+    }
+
+    protected function createFieldTypeUnderTest()
+    {
+        $htmlPurifier = new HtmlPurifier();
+        $fieldType = new HtmlTextType($htmlPurifier);
+        $fieldType->setTransformationProcessor($this->getTransformationProcessorMock());
+
+        return $fieldType;
+    }
+
+    protected function provideFieldTypeIdentifier()
+    {
+        return 'nghtmltext';
+    }
+
+    protected function getValidatorConfigurationSchemaExpectation()
+    {
+        return [];
+    }
+
+    protected function getSettingsSchemaExpectation()
+    {
+        return [
+            'textRows' => [
+                'type' => 'int',
+                'default' => 10,
+            ],
+        ];
+    }
+
+    protected function getEmptyValueExpectation()
+    {
+        return new HtmlTextValue();
     }
 }

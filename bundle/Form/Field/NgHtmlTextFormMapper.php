@@ -26,10 +26,10 @@ class NgHtmlTextFormMapper extends AbstractRelationFormMapper
                             'required' => $fieldDefinition->isRequired,
                             'label' => $fieldDefinition->getName(),
                             'rows' => $data->fieldDefinition->fieldSettings['textRows'],
-                        ]
+                        ],
                     )
                     ->setAutoInitialize(false)
-                    ->getForm()
+                    ->getForm(),
             );
     }
 }

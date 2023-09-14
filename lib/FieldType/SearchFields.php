@@ -10,6 +10,10 @@ use Ibexa\Contracts\Core\Persistence\Content\Type\FieldDefinition;
 use Ibexa\Contracts\Core\Search;
 use Ibexa\Contracts\Core\Search\FieldType\StringField;
 
+use function mb_substr;
+use function strtok;
+use function trim;
+
 class SearchFields implements Indexable
 {
     public function getIndexData(Field $field, FieldDefinition $fieldDefinition)
@@ -18,12 +22,12 @@ class SearchFields implements Indexable
             new Search\Field(
                 'value',
                 $this->extractShortText($field->value->data),
-                new Search\FieldType\StringField()
+                new Search\FieldType\StringField(),
             ),
             new Search\Field(
                 'fulltext',
                 $field->value->data,
-                new Search\FieldType\FullTextField()
+                new Search\FieldType\FullTextField(),
             ),
         ];
     }
@@ -35,15 +39,6 @@ class SearchFields implements Indexable
         ];
     }
 
-    private function extractShortText($string)
-    {
-        if ($string === null || trim($string) === '') {
-            return '';
-        }
-
-        return mb_substr(strtok(trim((string)$string), "\r\n"), 0, 255);
-    }
-
     public function getDefaultMatchField()
     {
         return 'value';
@@ -52,5 +47,14 @@ class SearchFields implements Indexable
     public function getDefaultSortField()
     {
         return $this->getDefaultMatchField();
+    }
+
+    private function extractShortText($string)
+    {
+        if ($string === null || trim($string) === '') {
+            return '';
+        }
+
+        return mb_substr(strtok(trim((string) $string), "\r\n"), 0, 255);
     }
 }

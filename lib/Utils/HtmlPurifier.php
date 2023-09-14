@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Netgen\IbexaFieldTypeHtmlText\Utils;
 
 use HTMLPurifier as BaseHTMLPurifier;

@@ -6,6 +6,4 @@ namespace Netgen\IbexaFieldTypeHtmlTextBundle\Form\Field;
 
 use Ibexa\AdminUi\Form\DataTransformer\FieldType\FieldValueTransformer;
 
-class NgHtmlTextValueTransformer extends FieldValueTransformer
-{
-}
+class NgHtmlTextValueTransformer extends FieldValueTransformer {}

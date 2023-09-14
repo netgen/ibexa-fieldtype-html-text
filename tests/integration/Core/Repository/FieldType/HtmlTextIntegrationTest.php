@@ -9,6 +9,8 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\Tests\Integration\Core\Repository\FieldType\BaseIntegrationTest;
 use Netgen\IbexaFieldTypeHtmlText\FieldType\Value as HtmlTextValue;
 
+use const PHP_EOL;
+
 /**
  * Integration test for use field type.
  *
@@ -75,9 +77,9 @@ class HtmlTextIntegrationTest extends BaseIntegrationTest
 
     public function assertFieldDataLoadedCorrect(Field $field)
     {
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             HtmlTextValue::class,
-            $field->value
+            $field->value,
         );
 
         $expectedData = [
@@ -85,7 +87,7 @@ class HtmlTextIntegrationTest extends BaseIntegrationTest
         ];
         $this->assertPropertiesCorrect(
             $expectedData,
-            $field->value
+            $field->value,
         );
     }
 
@@ -106,9 +108,9 @@ class HtmlTextIntegrationTest extends BaseIntegrationTest
 
     public function assertUpdatedFieldDataLoadedCorrect(Field $field)
     {
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             HtmlTextValue::class,
-            $field->value
+            $field->value,
         );
 
         $expectedData = [
@@ -116,7 +118,7 @@ class HtmlTextIntegrationTest extends BaseIntegrationTest
         ];
         $this->assertPropertiesCorrect(
             $expectedData,
-            $field->value
+            $field->value,
         );
     }
 
@@ -127,9 +129,9 @@ class HtmlTextIntegrationTest extends BaseIntegrationTest
 
     public function assertCopiedFieldDataLoadedCorrectly(Field $field)
     {
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             HtmlTextValue::class,
-            $field->value
+            $field->value,
         );
 
         $expectedData = [
@@ -137,7 +139,7 @@ class HtmlTextIntegrationTest extends BaseIntegrationTest
         ];
         $this->assertPropertiesCorrect(
             $expectedData,
-            $field->value
+            $field->value,
         );
     }
 
@@ -151,11 +153,11 @@ class HtmlTextIntegrationTest extends BaseIntegrationTest
             // HTML purifier test cases
             [
                 new HtmlTextValue('<b>Bold'),
-                '<b>Bold</b>'
+                '<b>Bold</b>',
             ],
             [
                 new HtmlTextValue("<h1>News</h1><script>alert('Something malicious');</script><a onclick=\"alert('Another malicious thing');\" href=\"https://netgen.io\">Netgen</a>"),
-                '<h1>News</h1><a href="https://netgen.io">Netgen</a>'
+                '<h1>News</h1><a href="https://netgen.io">Netgen</a>',
             ],
         ];
     }
@@ -201,7 +203,7 @@ class HtmlTextIntegrationTest extends BaseIntegrationTest
     protected function getSearchTargetValueOne()
     {
         // ensure case-insensitivity
-        return strtoupper('caution is the " path to mediocrity');
+        return mb_strtoupper('caution is the " path to mediocrity');
     }
 
     protected function getValidSearchValueTwo()
@@ -212,7 +214,7 @@ class HtmlTextIntegrationTest extends BaseIntegrationTest
     protected function getSearchTargetValueTwo()
     {
         // ensure case-insensitivity
-        return strtoupper("truth suffers from ' too much analysis");
+        return mb_strtoupper("truth suffers from ' too much analysis");
     }
 
     protected function getFullTextIndexedFieldData()
