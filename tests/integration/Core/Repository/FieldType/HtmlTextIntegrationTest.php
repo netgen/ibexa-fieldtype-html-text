@@ -148,6 +148,15 @@ class HtmlTextIntegrationTest extends BaseIntegrationTest
                 new HtmlTextValue('Simple value'),
                 'Simple value',
             ],
+            // HTML purifier test cases
+            [
+                new HtmlTextValue('<b>Bold'),
+                '<b>Bold</b>'
+            ],
+            [
+                new HtmlTextValue("<h1>News</h1><script>alert('Something malicious');</script><a onclick=\"alert('Another malicious thing');\" href=\"https://netgen.io\">Netgen</a>"),
+                '<h1>News</h1><a href="https://netgen.io">Netgen</a>'
+            ],
         ];
     }
 

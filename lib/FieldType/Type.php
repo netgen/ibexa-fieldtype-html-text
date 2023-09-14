@@ -10,9 +10,16 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\Core\FieldType\FieldType;
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\Core\FieldType\Value as BaseValue;
+use Netgen\IbexaFieldTypeHtmlText\Utils\HtmlPurifier;
 
 class Type extends FieldType
 {
+    private HtmlPurifier $htmlPurifier;
+
+    public function __construct(HtmlPurifier $htmlPurifier) {
+        $this->htmlPurifier = $htmlPurifier;
+    }
+
     protected $settingsSchema = [
         'textRows' => [
             'type' => 'int',
@@ -77,7 +84,7 @@ class Type extends FieldType
             return null;
         }
 
-        return $value->text;
+        return $this->htmlPurifier->purify($value->text);
     }
 
     public function isSearchable()

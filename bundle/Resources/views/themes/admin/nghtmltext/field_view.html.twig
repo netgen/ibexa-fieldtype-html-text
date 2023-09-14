@@ -4,7 +4,7 @@
 
 {% block nghtmltext_field %}
     {% apply spaceless %}
-        {% set field_value = field.value|nl2br %}
+        {% set field_value = field.value|raw %}
         {{ block( 'simple_block_field' ) }}
     {% endapply %}
 {% endblock %}

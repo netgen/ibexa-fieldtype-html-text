@@ -4,6 +4,8 @@ parameters:
 services:
     Netgen\IbexaFieldTypeHtmlText\FieldType\Type:
         parent: Ibexa\Core\FieldType\FieldType
+        arguments:
+            - '@Netgen\IbexaFieldTypeHtmlText\Utils\HtmlPurifier'
         public: true
         tags:
             - { name: ibexa.field_type, alias: '%ng.fieldtype.html_text.identifier%' }
@@ -35,3 +37,6 @@ services:
             - '@ibexa.api.service.field_type'
         tags:
             - { name: 'form.type' }
+
+    Netgen\IbexaFieldTypeHtmlText\Utils\HtmlPurifier:
+        class: Netgen\IbexaFieldTypeHtmlText\Utils\HtmlPurifier
