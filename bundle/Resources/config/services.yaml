@@ -50,12 +50,3 @@ services:
         tags:
             - { name: ibexa.admin_ui.component, group: script-body }
 
-#    nghtmltext.adminui.component.javascripts:
-#        parent: Ibexa\AdminUi\Component\TwigComponent
-#        autowire: true
-#        autoconfigure: false
-#        arguments:
-#            $template: javascripts.html.twig
-#        tags:
-#            - { name: ibexa.admin_ui.component, group: script-head }
-
