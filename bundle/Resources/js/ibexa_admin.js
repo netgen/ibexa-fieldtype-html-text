@@ -8,9 +8,6 @@ const ready = (callback) => {
 }
 
 ready(() => {
-
-    console.log(document.querySelectorAll('.ibexa-field-edit--nghtmltext textarea'));
-
     tinymce.init({
         selector: '.ibexa-field-edit--nghtmltext textarea',
         base_url: '/bundles/netgenibexafieldtypehtmltext/tinymce/js/tinymce',
