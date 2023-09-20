@@ -1,16 +1,23 @@
-import Editor from '../public/ckeditor/build/ckeditor';
+import tinymce from '../public/tinymce/js/tinymce/tinymce.min'
+import '../public/tinymce/js/tinymce/themes/silver/theme.min';
+import '../public/tinymce/js/tinymce/plugins/link/plugin';
 
 const ready = (callback) => {
     if (document.readyState !== "loading") callback();
     else document.addEventListener("DOMContentLoaded", callback);
 }
 
-ready(async () => {
-    const ckEditorTextareas = Array.from(document.querySelectorAll('.nghtmltext > textarea'));
-
-    ckEditorTextareas.forEach((ckEditor) => {
-        Editor.create(ckEditor).catch( error => {
-            console.error( error );
-        } );
+ready(() => {
+    tinymce.init({
+        selector: '.nghtmltext > textarea',
+        base_url: '/bundles/netgenibexafieldtypehtmltext/tinymce/js/tinymce',
+        statusbar: false,
+        menubar: false,
+        toolbar: 'undo redo | blocks | ' +
+            'bold italic underline strikethrough | alignleft aligncenter ' +
+            'alignright alignjustify | bullist numlist | outdent indent | ' +
+            'link unlink | ' +
+            'removeformat',
+        plugins: 'link'
     });
 });
