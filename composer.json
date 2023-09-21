@@ -13,8 +13,8 @@
         "ext-dom": "*",
         "ext-json": "*",
         "ext-pdo": "*",
-        "ibexa/admin-ui": "*",
-        "ibexa/content-forms": "*",
+        "ibexa/admin-ui": "^4.5",
+        "ibexa/content-forms": "^4.5",
         "ibexa/core": "^4.2",
         "ezyang/htmlpurifier": "^4.16",
         "xemlock/htmlpurifier-html5": "^0.1.11"

@@ -9,6 +9,8 @@ use Ibexa\Core\Base\Exceptions\InvalidArgumentType;
 use Ibexa\Tests\Integration\Core\Repository\FieldType\BaseIntegrationTest;
 use Netgen\IbexaFieldTypeHtmlText\FieldType\Value as HtmlTextValue;
 
+use function mb_strtoupper;
+
 use const PHP_EOL;
 
 /**
