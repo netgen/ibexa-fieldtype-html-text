@@ -40,3 +40,13 @@ services:
 
     Netgen\IbexaFieldTypeHtmlText\Utils\HtmlPurifier:
         class: Netgen\IbexaFieldTypeHtmlText\Utils\HtmlPurifier
+
+    app.components.my_script_component:
+        parent: Ibexa\AdminUi\Component\ScriptComponent
+        autowire: true
+        autoconfigure: false
+        arguments:
+            $src: "/bundles/netgenibexafieldtypehtmltext/build/admin_app.js"
+        tags:
+            - { name: ibexa.admin_ui.component, group: script-body }
+

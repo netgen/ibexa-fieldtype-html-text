@@ -1,3 +1,4 @@
 {
-  "build/app.js": "/bundles/netgenibexafieldtypehtmltext/build/app.js"
+  "build/app.js": "/bundles/netgenibexafieldtypehtmltext/build/app.js",
+  "build/admin_app.js": "/bundles/netgenibexafieldtypehtmltext/build/admin_app.js"
 }

@@ -51656,16 +51656,16 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!************************************!*\
-  !*** ./bundle/Resources/js/app.js ***!
-  \************************************/
+/*!********************************************!*\
+  !*** ./bundle/Resources/js/ibexa_admin.js ***!
+  \********************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nghtmltext_tinymce__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./nghtmltext-tinymce */ "./bundle/Resources/js/nghtmltext-tinymce.js");
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers */ "./bundle/Resources/js/helpers.js");
 
 
 (0,_helpers__WEBPACK_IMPORTED_MODULE_1__["default"])(function () {
-  (0,_nghtmltext_tinymce__WEBPACK_IMPORTED_MODULE_0__["default"])('.nghtmltext > textarea');
+  (0,_nghtmltext_tinymce__WEBPACK_IMPORTED_MODULE_0__["default"])('.ibexa-field-edit--nghtmltext textarea');
 });
 })();
 

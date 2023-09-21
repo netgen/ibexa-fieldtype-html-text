@@ -1,4 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
+const path = require("path");
 
 Encore.reset();
 
@@ -10,6 +11,7 @@ Encore
     .setPublicPath(`/bundles/netgenibexafieldtypehtmltext/build`)
 
     .addEntry('app', `./bundle/Resources/js/app.js`)
+    .addEntry('admin_app', `./bundle/Resources/js/ibexa_admin.js`)
 
     .setManifestKeyPrefix('build/')
 
@@ -23,6 +25,11 @@ Encore
         config.useBuiltIns = 'entry';
         config.corejs = 3;
     });
+
+//
+// Encore.addAliases({
+//     '@ckeditor': path.resolve('./public/bundles/ibexaadminuiassets/vendors/@ckeditor'),
+// });
 
 const nghtmltextApp = Encore.getWebpackConfig();
 
