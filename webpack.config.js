@@ -26,11 +26,6 @@ Encore
         config.corejs = 3;
     });
 
-//
-// Encore.addAliases({
-//     '@ckeditor': path.resolve('./public/bundles/ibexaadminuiassets/vendors/@ckeditor'),
-// });
-
 const nghtmltextApp = Encore.getWebpackConfig();
 
 nghtmltextApp.watchOptions = { poll: true, ignored: /node_modules/ };
