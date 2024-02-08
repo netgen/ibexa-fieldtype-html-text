@@ -14,6 +14,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Yaml\Yaml;
 
 use function file_get_contents;
+use function in_array;
 
 class NetgenIbexaFieldTypeHtmlTextExtension extends Extension implements PrependExtensionInterface
 {
