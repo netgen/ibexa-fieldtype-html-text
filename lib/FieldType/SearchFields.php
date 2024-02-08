@@ -22,7 +22,7 @@ class SearchFields implements Indexable
             new Search\Field(
                 'value',
                 $this->extractShortText($field->value->data),
-                new Search\FieldType\StringField(),
+                new StringField(),
             ),
             new Search\Field(
                 'fulltext',
