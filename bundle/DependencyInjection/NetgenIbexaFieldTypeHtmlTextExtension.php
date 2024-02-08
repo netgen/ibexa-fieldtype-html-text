@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Netgen\IbexaFieldTypeHtmlTextBundle\DependencyInjection;
 
+use Netgen\Bundle\OpenGraphBundle\NetgenOpenGraphBundle;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -13,6 +14,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Yaml\Yaml;
 
 use function file_get_contents;
+use function in_array;
 
 class NetgenIbexaFieldTypeHtmlTextExtension extends Extension implements PrependExtensionInterface
 {
@@ -27,6 +29,13 @@ class NetgenIbexaFieldTypeHtmlTextExtension extends Extension implements Prepend
         );
 
         $loader->load('services.yaml');
+
+        /** @var array<class-string> $activatedBundles */
+        $activatedBundles = $container->getParameter('kernel.bundles');
+
+        if (in_array(NetgenOpenGraphBundle::class, $activatedBundles, true)) {
+            $loader->load('opengraph.yaml');
+        }
     }
 
     public function prepend(ContainerBuilder $container): void
